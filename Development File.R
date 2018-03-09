@@ -19,8 +19,23 @@ setClass(Class="Rasch",  #Sets S4 class of Rasch
          )
 )
 
-setValidity("Rasch", function(object){ #do this later 
 
+
+
+
+setValidity("Rasch", function(object){  
+
+  valuesLength= (length(object@a_value)== length(object@y_j_value))#Makes values the same length
+  
+  CarTest = function(object){
+   z<- (object@y_j_value ==1 | object@y_j_value ==0 ) #ensures only values of 0 or 1 possible as y value
+   return(z)
+  }
+  
+ if(!valuesLength | !all(CarTest(object))){ #returns error if chosen Rasch is broken        
+    stop("Rasch not valid")
+  }
+  
 })
 
 
