@@ -36,24 +36,24 @@ test<- new('Rasch', name= "Steve", a_value= a, y_j_value= y  )
 
 
 PQ= vector(mode="numeric", length= length(test@y_j_value)) #creates blank PQ vector
-P= PQ= vector(mode="numeric", length= length(test@y_j_value)) #creates blank P vector
+P= vector(mode="numeric", length= length(test@y_j_value)) #creates blank P vector
 
-Probability<- function(Rasch, theta){
-  for(i in 1:length(Rasch@y_j_value)){ #this loop calculates the P values
-    P.i.j= (exp(theta - Rasch@a_value[i]))/(1+exp(theta - Rasch@a_value[i]))
+Probability<- function(raschObj, theta){
+  for(i in 1:length(raschObj@y_j_value)){ #this loop calculates the P values
+    P.i.j= (exp(theta - raschObj@a_value[i]))/(1+exp(theta - raschObj@a_value[i]))
     
     P[i]= P.i.j}
     
     
-   for(i in 1:length(Rasch@y_j_value)){#this loop calculates PQ values
+   for(i in 1:length(raschObj@y_j_value)){#this loop calculates PQ values
     
-    if(Rasch@ y_j_value[i]==1){
-      P.i.j= (exp(theta - Rasch@a_value[i]))/(1+exp(theta - Rasch@a_value[i]))
+    if(raschObj@ y_j_value[i]==1){
+      P.i.j= (exp(theta - raschObj@a_value[i]))/(1+exp(theta - raschObj@a_value[i]))
       
       PQ[i]<- P.i.j # P
     }
-    if(Rasch@ y_j_value[i]==0){
-      P.i.j= (exp(theta - Rasch@a_value[i]))/(1+exp(theta - Rasch@a_value[i]))
+    if(raschObj@ y_j_value[i]==0){
+      P.i.j= (exp(theta - raschObj@a_value[i]))/(1+exp(theta - raschObj@a_value[i]))
       
       PQ[i]<- 1-P.i.j # Q
     }
@@ -65,18 +65,18 @@ Probability<- function(Rasch, theta){
 }
 
 
-Probability(test, 6)
+Probability(test, -6)
 
 ############## Liklihood function 
 
-Liklihood<- function(Rasch, theta){
-  P_Q_values = Probability(Rasch,theta)[[2]] #This gets the PQ values from Probability function
+Liklihood<- function(raschObj, theta){
+  P_Q_values = Probability(raschObj,theta)[[2]] #This gets the PQ values from Probability function
   x<- prod(P_Q_values) # Multiplies them all together 
   
   return(x)
 }
 
-Liklihood(test, 6)
+Liklihood(test, 5)
 
 ####### Prior
 
@@ -89,5 +89,25 @@ Prior<- function(theta){ #takes in theta
   return(height) #returns Height
 }
 
-Prior(6)
+Prior(45)
+
+###### EAP
+
+
+EAP<- function(raschObj, lower, upper){
+  
+  myFunction <- function(raschObj, theta){
+    f= theta* Liklihood(raschObj, theta) *Prior(theta)
+    
+    return(f)
+  }
+ 
+ g_of_theta = integrate(myFunction, raschObj= raschObj, lower= lower, upper= upper)
+  
+  return(g_of_theta)
+}
+
+EAP(test,-6,6)
+
+
 
