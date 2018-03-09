@@ -9,8 +9,8 @@ y= c(1,1,1,0,0,1,1,0,1) #answer. 1 is correct. 0 is incorrect
 setClass(Class="Rasch",  #Sets S4 class of Rasch
          representation = representation(
            name = "character", # three slots as specified in problem set
-           a_value = "numeric", 
-           y_j_value = "numeric"
+           a_value = "vector", 
+           y_j_value = "vector"
          ),
          prototype = prototype(
            name = c(), #default values are empty 
@@ -30,5 +30,33 @@ setMethod("initialize", "Rasch", function(.Object, ...) { #initilize method
   return(value)
 })
 
-###########
+########### Making probability function 
+
+test<- new('Rasch', name= "Steve", a_value= a, y_j_value= y  )
+
+
+vector= vector(mode="numeric", length= length(test@y_j_value))
+
+work.pls<- function(Rasch, theta){
+  for(i in 1:length(Rasch@y_j_value)){
+    
+    if(Rasch@ y_j_value[i]==1){
+      P.i.j= (exp(theta - Rasch@a_value[i]))/(1+exp(theta - Rasch@a_value[i]))
+      
+      vector[i]<- P.i.j
+    }
+    if(Rasch@ y_j_value[i]==0){
+      P.i.j= (exp(theta - Rasch@a_value[i]))/(1+exp(theta - Rasch@a_value[i]))
+      
+      vector[i]<- 1-P.i.j
+    }
+    
+    
+  }
+  return(vector)
+}
+
+
+work.pls(test, 6)
+
 
