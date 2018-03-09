@@ -2,7 +2,7 @@
 
 a= c(1,2,3,4,5,4,3,2,1) #difficulty
 
-y= c(1,1,1,0,0,1,1,0,1) #answer. 1 is correct. 0 is incorrect 
+y= c(1,1,0,0,0,0,1,1,1) #answer. 1 is correct. 0 is incorrect 
 
 ### creating Rasch class
 
@@ -111,5 +111,17 @@ EAP<- function(raschObj, lower, upper){
 
 z<- EAP(test,-6,6)
 
+### Print function 
 
+setMethod("print", "Rasch",
+          function(x){
+            print(x@name) #prints name
+            
+           z<- EAP(x,-6,6) #does EAP calculation 
+           
+           print(z$value) #prints value
+           print(z$abs.error) #prints absolute error
+            
+})
 
+print(test)
