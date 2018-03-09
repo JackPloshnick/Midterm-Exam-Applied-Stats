@@ -4,7 +4,7 @@
 \alias{Prior}
 \title{Runs Prior function}
 \usage{
-Prior(theta)
+Prior(theta = "numeric")
 }
 \arguments{
 \item{theta}{numeric designating difficulty}

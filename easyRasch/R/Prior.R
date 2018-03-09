@@ -11,8 +11,15 @@
 
 #' @rdname Prior
 #' @export
-Prior<- function(theta){ #takes in theta
+
+setGeneric("Prior", #sets generic function in S4
+           function(theta="numeric") {
+             standardGeneric("Prior")
+           } )
+
+setMethod("Prior", "numeric",
+ function(theta){ #takes in theta
   height<- dnorm(theta, mean=0, sd=3) #calculates Height
   
   return(height) #returns Height
-}
+})

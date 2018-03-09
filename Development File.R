@@ -10,7 +10,7 @@ library(roxygen2)
 package.skeleton()
 
 
-current.code <- as.package("Midterm")
+current.code <- as.package("easyRasch")
 load_all(current.code)
 document(current.code)
 

@@ -12,7 +12,14 @@
 #' 
 #' @rdname Liklihood
 #' @export
-Liklihood<- function(raschObj, theta){
+
+setGeneric("Liklihood", #sets generic function in S4
+           function(raschObj="Rasch", theta= "numeric") {
+             standardGeneric("Liklihood")
+           } )
+
+setMethod("Liklihood",c( "Rasch", "numeric"),
+  function(raschObj, theta){
   
   
   P_Q_values = Probability(raschObj,theta)[[2]] #This gets the PQ values from Probability function
@@ -33,4 +40,4 @@ Liklihood<- function(raschObj, theta){
     
     return(x)
   }
-}
+})

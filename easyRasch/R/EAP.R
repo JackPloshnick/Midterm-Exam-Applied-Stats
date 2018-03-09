@@ -14,7 +14,15 @@
 
 #' @rdname EAP
 #' @export
-EAP<- function(raschObj, lower, upper){
+
+setGeneric("EAP", #sets generic function in S4
+           function(raschObj="Rasch", lower= "numeric", upper= "numeric") {
+             standardGeneric("EAP")
+           } )
+
+setMethod("EAP", c( "Rasch","numeric","numeric"),
+
+ function(raschObj, lower, upper){
   
   myFunction <- function(raschObj, theta){# I am not quite sure what the question is asking 
     f= theta* Liklihood(raschObj, theta) *Prior(theta) #I interpret the question to mean, integrate over the function
@@ -27,4 +35,4 @@ EAP<- function(raschObj, lower, upper){
   g_of_theta = integrate(myFunction, raschObj= raschObj, lower= lower, upper= upper)#integrates over function 
   
   return(g_of_theta)
-}
+})
