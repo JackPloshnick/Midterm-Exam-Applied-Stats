@@ -35,36 +35,36 @@ setMethod("initialize", "Rasch", function(.Object, ...) { #initilize method
 test<- new('Rasch', name= "Steve", a_value= a, y_j_value= y  )
 
 
-PQ= vector(mode="numeric", length= length(test@y_j_value))
-P= PQ= vector(mode="numeric", length= length(test@y_j_value))
+PQ= vector(mode="numeric", length= length(test@y_j_value)) #creates blank PQ vector
+P= PQ= vector(mode="numeric", length= length(test@y_j_value)) #creates blank P vector
 
-work.pls<- function(Rasch, theta){
-  for(i in 1:length(Rasch@y_j_value)){
+Probability<- function(Rasch, theta){
+  for(i in 1:length(Rasch@y_j_value)){ #this loop calculates the P values
     P.i.j= (exp(theta - Rasch@a_value[i]))/(1+exp(theta - Rasch@a_value[i]))
     
     P[i]= P.i.j}
     
     
-   for(i in 1:length(Rasch@y_j_value)){
+   for(i in 1:length(Rasch@y_j_value)){#this loop calculates PQ values
     
     if(Rasch@ y_j_value[i]==1){
       P.i.j= (exp(theta - Rasch@a_value[i]))/(1+exp(theta - Rasch@a_value[i]))
       
-      PQ[i]<- P.i.j
+      PQ[i]<- P.i.j # P
     }
     if(Rasch@ y_j_value[i]==0){
       P.i.j= (exp(theta - Rasch@a_value[i]))/(1+exp(theta - Rasch@a_value[i]))
       
-      PQ[i]<- 1-P.i.j
+      PQ[i]<- 1-P.i.j # Q
     }
     
     
   }
-  return(list(P, PQ))
+  return(list(P, PQ)) #this returns both vectors 
  
 }
 
 
-work.pls(test, 6)
+Probability(test, 6)
 
 
