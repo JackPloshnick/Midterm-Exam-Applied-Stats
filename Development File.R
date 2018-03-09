@@ -67,4 +67,18 @@ Probability<- function(Rasch, theta){
 
 Probability(test, 6)
 
+############## Liklihood function 
+
+
+
+Liklihood<- function(Rasch, theta){
+  P_Q_values = Probability(Rasch,theta)[[2]] #This gets the PQ values from Probability function
+  x<- prod(P_Q_values) # Multiplies them all together 
+  
+  return(x)
+}
+
+Liklihood(test, 6)
+
+
 
