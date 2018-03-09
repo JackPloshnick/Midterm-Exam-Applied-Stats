@@ -1,7 +1,19 @@
-### creating Rasch class
-
-
-
+#' Creates Rasch Class
+#'
+#' 
+#'
+#' @param name a character 
+#' @param a_value difficulty 
+#' @param y_j_value dummy for correct answer 
+#'
+#' @return Class of Rasch
+#' @author Jack Ploshnick
+#' @note Makes the Class
+#' @examples
+#' 
+ 
+#' @rdname Rasch
+#' @export
 setClass(Class="Rasch",  #Sets S4 class of Rasch
          representation = representation(
            name = "character", # three slots as specified in problem set

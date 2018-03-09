@@ -1,0 +1,17 @@
+Package: Midterm
+Type: Package
+Title: Answers Questions of the Midterm exam
+Version: 1.0
+Date: 2018-03-08
+Author: Jack Ploshnick
+Maintainer: Jack Ploshnick <j.ploshnick@wustl.edu>
+Description: Creates class Rasch, solves for Preobability, liklihood, Prior, EAP and Print
+License: GPL (>2)
+Collate:
+    'Rasch Class.R'
+    'Probability.R'
+    'Liklihood.R'
+    'Prior.R'
+    'EAP.R'
+    'Print.R'
+RoxygenNote: 6.0.1

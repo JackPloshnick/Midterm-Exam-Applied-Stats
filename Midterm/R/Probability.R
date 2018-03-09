@@ -1,7 +1,25 @@
-PQ= vector(mode="numeric", length= length(test@y_j_value)) #creates blank PQ vector
-P= vector(mode="numeric", length= length(test@y_j_value)) #creates blank P vector
+#' Runs Probability function
+#'
+#' 
+#'
+#' @param raschObj a object of class Rasch
+#' @param theta numeric designating difficulty 
+#'
+#' @return two lists. one of P.i.j. One of PQ
+#' @author Jack Ploshnick
+#' @note It works with a for loop
+#' @examples
+#' 
+
+#' @rdname Probability 
+#' @export
+
+
 
 Probability<- function(raschObj, theta){
+  
+  PQ= vector(mode="numeric", length= length(test@y_j_value)) #creates blank PQ vector
+  P= vector(mode="numeric", length= length(test@y_j_value)) #creates blank P vector
   
   for(i in 1:length(raschObj@y_j_value)){ #this loop calculates the P values
     P.i.j= (exp(theta - raschObj@a_value[i]))/(1+exp(theta - raschObj@a_value[i])) #formula from paper

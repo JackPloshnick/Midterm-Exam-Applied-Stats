@@ -1,3 +1,17 @@
+#' Runs Liklihood function
+#'
+#' 
+#'
+#' @param raschObj a object of class Rasch
+#' @param theta a numeric designating theta 
+#'
+#' @return A numeric that is the product of PQ values 
+#' @author Jack Ploshnick
+#' @note I am not exactly sure what math I am suppose to do here. This is my best intepretation 
+#' @examples
+#' 
+#' @rdname Liklihood
+#' @export
 Liklihood<- function(raschObj, theta){
   
   

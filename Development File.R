@@ -1,5 +1,28 @@
 #Start time 6:52 PM on 3/3/18
 
+
+########### make the Package
+
+library(devtools)
+library(roxygen2)
+
+package.skeleton()
+
+
+current.code <- as.package("Midterm")
+load_all(current.code)
+document(current.code)
+
+?Liklihood
+
+
+
+
+
+
+
+############### function 
+
 a= c(1,2,3,4,5,4,3,2,1) #difficulty
 
 y= c(1,1,0,0,0,0,1,1,1) #answer. 1 is correct. 0 is incorrect 

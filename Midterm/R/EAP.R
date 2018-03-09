@@ -1,3 +1,19 @@
+#' Runs EAP function
+#'
+#' 
+#'
+#' @param raschObj a object of class Rasch
+#' @param lower lower bound of integral. should be -6
+#' @param upper upper bound of integral. should be 6
+#'
+#' @return A numeric 
+#' @author Jack Ploshnick
+#' @note I am not exactly sure what math I am suppose to do here. This is my best intepretation 
+#' @examples
+#' 
+
+#' @rdname EAP
+#' @export
 EAP<- function(raschObj, lower, upper){
   
   myFunction <- function(raschObj, theta){# I am not quite sure what the question is asking 

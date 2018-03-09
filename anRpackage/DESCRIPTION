@@ -1,9 +1,0 @@
-Package: Midterm Exam
-Type: Package
-Title: This Package completes all the tasks designated in the Midterm examination 
-Version: 1.0
-Date: 2018-03-08
-Author: Jack Ploshnick
-Maintainer: Jack Ploshnick <j.ploshnick@wustl.edu>
-Description: Package creates a class of Rasch. Then calculates Probability, Liklihood, Prior and EAP. It then prints EAP
-License: GPL (>= 2)
