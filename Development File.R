@@ -6,6 +6,8 @@ y= c(1,1,0,0,0,0,1,1,1) #answer. 1 is correct. 0 is incorrect
 
 ### creating Rasch class
 
+
+
 setClass(Class="Rasch",  #Sets S4 class of Rasch
          representation = representation(
            name = "character", # three slots as specified in problem set
@@ -25,10 +27,10 @@ setClass(Class="Rasch",  #Sets S4 class of Rasch
 
 setValidity("Rasch", function(object){  
 
-  valuesLength= (length(object@a_value)== length(object@y_j_value))#Makes values the same length
+  valuesLength= (length(object@a_value)== length(object@y_j_value))#ensures values the same length
   
   CarTest = function(object){
-   z<- (object@y_j_value ==1 | object@y_j_value ==0 ) #ensures only values of 0 or 1 possible as y value
+   z<- (object@y_j_value ==1 | object@y_j_value ==0 ) #ensures only values of 0 or 1 possible as y_j value
    return(z)
   }
   
@@ -47,6 +49,10 @@ setMethod("initialize", "Rasch", function(.Object, ...) { #initilize method
 
 ########### Making probability function 
 
+## it works. But I don't know how to do it in apply
+
+?apply
+
 test<- new('Rasch', name= "Steve", a_value= a, y_j_value= y  )
 
 
@@ -54,20 +60,21 @@ PQ= vector(mode="numeric", length= length(test@y_j_value)) #creates blank PQ vec
 P= vector(mode="numeric", length= length(test@y_j_value)) #creates blank P vector
 
 Probability<- function(raschObj, theta){
+  
   for(i in 1:length(raschObj@y_j_value)){ #this loop calculates the P values
-    P.i.j= (exp(theta - raschObj@a_value[i]))/(1+exp(theta - raschObj@a_value[i]))
+    P.i.j= (exp(theta - raschObj@a_value[i]))/(1+exp(theta - raschObj@a_value[i])) #formula from paper
     
     P[i]= P.i.j}
     
     
    for(i in 1:length(raschObj@y_j_value)){#this loop calculates PQ values
     
-    if(raschObj@ y_j_value[i]==1){
+    if(raschObj@ y_j_value[i]==1){#if y==1, use P.i.j value
       P.i.j= (exp(theta - raschObj@a_value[i]))/(1+exp(theta - raschObj@a_value[i]))
       
       PQ[i]<- P.i.j # P
     }
-    if(raschObj@ y_j_value[i]==0){
+    if(raschObj@ y_j_value[i]==0){ #if y==0, use 1- p.i.j value
       P.i.j= (exp(theta - raschObj@a_value[i]))/(1+exp(theta - raschObj@a_value[i]))
       
       PQ[i]<- 1-P.i.j # Q
@@ -84,12 +91,30 @@ Probability(test, -6)
 
 ############## Liklihood function 
 
+
 Liklihood<- function(raschObj, theta){
+  
+  
   P_Q_values = Probability(raschObj,theta)[[2]] #This gets the PQ values from Probability function
-  x<- prod(P_Q_values) # Multiplies them all together 
+  
+  
+  for(i in 1:length(raschObj@y_j_value)){#this loop calculates PQ values
+    
+    if(raschObj@y_j_value[i]==1){#if y==1, use P.i.j value
+     P_Q_values[i] = P_Q_values[i]^(raschObj@y_j_value[i])
+      
+    }
+    if(raschObj@y_j_value[i]==0){ #if y==0, use 1- p.i.j value
+      P_Q_values[i] = P_Q_values[i]^(1-raschObj@y_j_value[i])
+      
+    }
+  
+x<- prod(P_Q_values) # Multiplies them all together 
   
   return(x)
+  }
 }
+
 
 Liklihood(test, 5)
 
