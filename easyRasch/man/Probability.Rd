@@ -4,7 +4,7 @@
 \alias{Probability}
 \title{Runs Probability function}
 \usage{
-Probability(raschObj = "Rasch", theta)
+Probability(raschObj = "Rasch", theta = "numeric")
 }
 \arguments{
 \item{raschObj}{a object of class Rasch}

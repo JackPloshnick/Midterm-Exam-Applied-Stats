@@ -13,14 +13,15 @@
 
 #' @rdname Probability 
 #' @export
+#' 
 
 setGeneric("Probability", #sets generic function in S4
-           function(raschObj="Rasch", theta) {
+           function(raschObj="Rasch", theta= "numeric") {
              standardGeneric("Probability")
            } )
 
-setMethod("Probability", c("Rasch","numeric"), 
- function(raschObj, theta){
+setMethod("Probability",c( "Rasch", "numeric"),
+          function(raschObj, theta){
   
   PQ= vector(mode="numeric", length= length(test@y_j_value)) #creates blank PQ vector
   P= vector(mode="numeric", length= length(test@y_j_value)) #creates blank P vector
@@ -50,4 +51,3 @@ setMethod("Probability", c("Rasch","numeric"),
   
 })
 
-Probability(test,6)
