@@ -35,25 +35,33 @@ setMethod("initialize", "Rasch", function(.Object, ...) { #initilize method
 test<- new('Rasch', name= "Steve", a_value= a, y_j_value= y  )
 
 
-vector= vector(mode="numeric", length= length(test@y_j_value))
+PQ= vector(mode="numeric", length= length(test@y_j_value))
+P= PQ= vector(mode="numeric", length= length(test@y_j_value))
 
 work.pls<- function(Rasch, theta){
   for(i in 1:length(Rasch@y_j_value)){
+    P.i.j= (exp(theta - Rasch@a_value[i]))/(1+exp(theta - Rasch@a_value[i]))
+    
+    P[i]= P.i.j}
+    
+    
+   for(i in 1:length(Rasch@y_j_value)){
     
     if(Rasch@ y_j_value[i]==1){
       P.i.j= (exp(theta - Rasch@a_value[i]))/(1+exp(theta - Rasch@a_value[i]))
       
-      vector[i]<- P.i.j
+      PQ[i]<- P.i.j
     }
     if(Rasch@ y_j_value[i]==0){
       P.i.j= (exp(theta - Rasch@a_value[i]))/(1+exp(theta - Rasch@a_value[i]))
       
-      vector[i]<- 1-P.i.j
+      PQ[i]<- 1-P.i.j
     }
     
     
   }
-  return(vector)
+  return(list(P, PQ))
+ 
 }
 
 
