@@ -69,8 +69,6 @@ Probability(test, 6)
 
 ############## Liklihood function 
 
-
-
 Liklihood<- function(Rasch, theta){
   P_Q_values = Probability(Rasch,theta)[[2]] #This gets the PQ values from Probability function
   x<- prod(P_Q_values) # Multiplies them all together 
@@ -80,5 +78,16 @@ Liklihood<- function(Rasch, theta){
 
 Liklihood(test, 6)
 
+####### Prior
 
+?dnorm
+
+
+Prior<- function(theta){ #takes in theta
+  height<- dnorm(theta, mean=0, sd=3) #calculates Height
+  
+  return(height) #returns Height
+}
+
+Prior(6)
 
